@@ -1,14 +1,23 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-const IndexScreen = () => {
+const IndexScreen = ({ navigation }) => {
   return (
-    <View>
-      <Text>Index Screen</Text>
+    <View style={styles.container}>
+      <Text>Open up Index.js to start working on your app!</Text>
+      <StatusBar style="auto" />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});
 
 export default IndexScreen;
