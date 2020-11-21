@@ -29,12 +29,12 @@ import FingerPrintScreen from "./src/screens/FingerPrintScreen";
 // });
 
 const switchNavigator = createSwitchNavigator({
-  fingerPrintFlow: createStackNavigator({
-    FingerPrint: FingerPrintScreen,
-  }),
-  loginFlow: createStackNavigator({
-    Login: LoginScreen,
-  }),
+  // fingerPrintFlow: createStackNavigator({
+  //   FingerPrint: FingerPrintScreen,
+  // }),
+  // loginFlow: createStackNavigator({
+  //   Login: LoginScreen,
+  // }),
   mainFlow: createBottomTabNavigator({
     exploreFlow: createStackNavigator({
       Explore: ExploreScreen,
