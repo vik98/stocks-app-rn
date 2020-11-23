@@ -9,6 +9,7 @@ import SearchStockScreen from "./src/screens/SearchStockScreen";
 import ViewStockScreen from "./src/screens/ViewStockScreen";
 import VoiceSearchStockScreen from "./src/screens/VoiceSearchStockScreen";
 import FingerPrintScreen from "./src/screens/FingerPrintScreen";
+import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 
 // const navigator = createStackNavigator(
 //   {
@@ -34,6 +35,7 @@ const switchNavigator = createSwitchNavigator({
   // }),
   // loginFlow: createStackNavigator({
   //   Login: LoginScreen,
+  //   ResolveAuth: ResolveAuthScreen,
   // }),
   mainFlow: createBottomTabNavigator({
     exploreFlow: createStackNavigator({

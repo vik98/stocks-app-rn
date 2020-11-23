@@ -1,11 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { SafeAreaView } from "react-navigation";
 
-const AccountScreen = () => {
+const AccountScreen = (props) => {
   return (
-    <View>
-      <Text>Account Screen</Text>
-    </View>
+    <SafeAreaView forceInset={{ top: "always" }}>
+      <View>
+        <Text> Profile Screen </Text>
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+          Welcome, {props.navigation.getParam("username")}
+        </Text>
+        <Button
+          title="Sign out"
+          onPress={() => props.navigation.navigate("Login")}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 

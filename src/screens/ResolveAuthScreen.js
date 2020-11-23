@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
-
+import React, { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import * as Google from "expo-google-app-auth";
 
 const IOS_CLIENT_ID =
@@ -8,7 +7,11 @@ const IOS_CLIENT_ID =
 const ANDROID_CLIENT_ID =
   "899650021977-ref8rip9ua3bf0a31ku2v0g526ab8ta3.apps.googleusercontent.com";
 
-const LoginScreen = (props) => {
+const ResolveAuthScreen = (props) => {
+  useEffect(() => {
+    signInWithGoogle();
+  });
+
   const signInWithGoogle = async () => {
     try {
       const result = await Google.logInAsync({
@@ -18,9 +21,8 @@ const LoginScreen = (props) => {
       });
 
       if (result.type === "success") {
-        console.log("LoginScreen.js.js 21 | ", result.user.givenName);
-        props.navigation.navigate("ResolveAuth", {
-          result: result,
+        console.log("ResolveAuth.js 24 | ", result.user.givenName);
+        props.navigation.navigate("mainFlow", {
           username: result.user.givenName,
         }); //after Google login redirect to Profile
         return result.accessToken;
@@ -28,22 +30,19 @@ const LoginScreen = (props) => {
         return { cancelled: true };
       }
     } catch (e) {
-      console.log("LoginScreen.js.js 30 | Error with login", e);
+      console.log("ResolveAuth.js 30 | Error with login", e);
       return { error: true };
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Button
-        title="Login "
-        onPress={() => props.navigation.navigate("ResolveAuth")}
-      />
+    <View style={[styles.container, styles.horizontal]}>
+      <ActivityIndicator size="large" color="#413075" />
     </View>
   );
 };
 
-LoginScreen.navigationOptions = () => {
+ResolveAuthScreen.navigationOptions = () => {
   return {
     header: () => false,
   };
@@ -52,10 +51,13 @@ LoginScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });
 
-export default LoginScreen;
+export default ResolveAuthScreen;

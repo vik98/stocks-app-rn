@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, StyleSheet, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  ActivityIndicator,
+} from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -77,213 +83,222 @@ const ViewStockScreen = ({ navigation }) => {
       return (
         <Text h6 style={{ color: "green" }}>
           <MaterialCommunityIcons name="arrow-up" size={13} color="green" />
-          {symbol.change}
+          {symbol.change} %
         </Text>
       );
     } else {
       return (
         <Text h6 style={{ color: "red" }}>
           <MaterialCommunityIcons name="arrow-down" size={13} color="red" />
-          {symbol.change}
+          {symbol.change} %
         </Text>
       );
     }
   };
-  return (
-    <ScrollView>
-      <View style={styles.symbol}>
-        <Text h4 style={{ color: "black" }}>
-          {symbol.symbol}
-        </Text>
-        <MaterialIcons name="playlist-add" size={30} color="black" />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "white",
-        }}
-      >
-        <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
-        <View>
-          <Text
-            style={{
-              width: 60,
-              textAlign: "center",
-              color: "gray",
-              fontSize: 13,
-            }}
-          >
-            Price
-          </Text>
-        </View>
-        <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
-      </View>
-      <View style={styles.price}>
-        <Text h4 style={{ color: "gray" }}>
-          $ {symbol.price}
-        </Text>
-        {change()}
-      </View>
-      <View style={styles.charts}>
-        <VictoryChart
-          theme={VictoryTheme.material}
-          domainPadding={{ x: 25 }}
-          scale={{ x: "time", y: "log" }}
-          width={400}
-        >
-          <VictoryAxis
-            style={{
-              axis: { stroke: "#413075" },
-              axisLabel: { fontSize: 20, padding: 30 },
-              ticks: { stroke: "black", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
-            }}
-          />
-          <VictoryAxis
-            dependentAxis
-            style={{
-              axis: { stroke: "#413075" },
-              axisLabel: { fontSize: 20, padding: 30 },
-              ticks: { stroke: "black", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
-            }}
-          />
-          <VictoryLine
-            style={{
-              data: { stroke: "#E43A19" },
-            }}
-            data={line}
-          />
-        </VictoryChart>
-      </View>
-      <View style={styles.button}>
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="D"
-          type="outline"
-        />
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="W"
-          type="outline"
-        />
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="M"
-          type="outline"
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "white",
-          paddingBottom: 10,
-        }}
-      >
-        <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
-        <View>
-          <Text
-            style={{
-              width: 100,
-              textAlign: "center",
-              color: "gray",
-              fontSize: 13,
-            }}
-          >
-            Performance
-          </Text>
-        </View>
-        <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
-      </View>
 
-      <View style={styles.performance}>
-        <Text h4 style={{ color: "gray" }}>
-          $ {symbol.low}
-        </Text>
-        <Text h4 style={{ color: "gray" }}>
-          $ {symbol.high}
-        </Text>
-      </View>
-      <View style={styles.performance}>
-        <Text style={{ color: "gray", fontSize: 10 }}>Low</Text>
-        <Text style={{ color: "gray", fontSize: 10 }}>High</Text>
-      </View>
-      <View style={styles.volume}>
-        <Text h4 style={{ color: "gray" }}>
-          {symbol.volume}
-        </Text>
-        <Text style={{ color: "gray", fontSize: 10 }}>Volume</Text>
-      </View>
-      <View style={styles.charts}>
-        <VictoryChart
-          theme={VictoryTheme.material}
-          domainPadding={{ x: 25 }}
-          scale={{ x: "time" }}
-          width={400}
+  if (data.length > 0) {
+    return (
+      <ScrollView>
+        <View style={styles.symbol}>
+          <Text h4 style={{ color: "black" }}>
+            {symbol.symbol}
+          </Text>
+          <MaterialIcons name="playlist-add" size={30} color="black" />
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "white",
+          }}
         >
-          <VictoryAxis
-            style={{
-              axis: { stroke: "#413075" },
-              axisLabel: { fontSize: 20, padding: 30 },
-              ticks: { stroke: "black", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
+          <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
+          <View>
+            <Text
+              style={{
+                width: 60,
+                textAlign: "center",
+                color: "gray",
+                fontSize: 13,
+              }}
+            >
+              Price
+            </Text>
+          </View>
+          <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
+        </View>
+        <View style={styles.price}>
+          <Text h4 style={{ color: "gray" }}>
+            $ {symbol.price}
+          </Text>
+          {change()}
+        </View>
+        <View style={styles.charts}>
+          <VictoryChart
+            theme={VictoryTheme.material}
+            domainPadding={{ x: 25 }}
+            scale={{ x: "time", y: "log" }}
+            width={400}
+          >
+            <VictoryAxis
+              style={{
+                axis: { stroke: "#413075" },
+                axisLabel: { fontSize: 20, padding: 30 },
+                ticks: { stroke: "black", size: 5 },
+                tickLabels: { fontSize: 10, padding: 5 },
+              }}
+            />
+            <VictoryAxis
+              dependentAxis
+              style={{
+                axis: { stroke: "#413075" },
+                axisLabel: { fontSize: 20, padding: 30 },
+                ticks: { stroke: "black", size: 5 },
+                tickLabels: { fontSize: 10, padding: 5 },
+              }}
+            />
+            <VictoryLine
+              style={{
+                data: { stroke: "#E43A19" },
+              }}
+              data={line}
+            />
+          </VictoryChart>
+        </View>
+        <View style={styles.button}>
+          <Button
+            buttonStyle={{
+              borderColor: "black",
             }}
+            title="D"
+            type="outline"
           />
-          <VictoryAxis
-            dependentAxis
-            style={{
-              axis: { stroke: "#413075" },
-              axisLabel: { fontSize: 20, padding: 30 },
-              ticks: { stroke: "black", size: 5 },
-              tickLabels: { fontSize: 10, padding: 5 },
+          <Button
+            buttonStyle={{
+              borderColor: "black",
             }}
+            title="W"
+            type="outline"
           />
-          <VictoryCandlestick
-            candleColors={{ positive: "#ffff", negative: "#E43A19" }}
-            style={{
-              data: {
-                fillOpacity: 1,
-                stroke: "#413075",
-                strokeWidth: 1,
-              },
+          <Button
+            buttonStyle={{
+              borderColor: "black",
             }}
-            data={data}
+            title="M"
+            type="outline"
           />
-        </VictoryChart>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "white",
+            paddingBottom: 10,
+          }}
+        >
+          <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
+          <View>
+            <Text
+              style={{
+                width: 100,
+                textAlign: "center",
+                color: "gray",
+                fontSize: 13,
+              }}
+            >
+              Performance
+            </Text>
+          </View>
+          <View style={{ flex: 1, height: 0.5, backgroundColor: "gray" }} />
+        </View>
+
+        <View style={styles.performance}>
+          <Text h4 style={{ color: "gray" }}>
+            $ {symbol.low}
+          </Text>
+          <Text h4 style={{ color: "gray" }}>
+            $ {symbol.high}
+          </Text>
+        </View>
+        <View style={styles.performance}>
+          <Text style={{ color: "gray", fontSize: 10 }}>Low</Text>
+          <Text style={{ color: "gray", fontSize: 10 }}>High</Text>
+        </View>
+        <View style={styles.volume}>
+          <Text h4 style={{ color: "gray" }}>
+            {symbol.volume}
+          </Text>
+          <Text style={{ color: "gray", fontSize: 10 }}>Volume</Text>
+        </View>
+        <View style={styles.charts}>
+          <VictoryChart
+            theme={VictoryTheme.material}
+            domainPadding={{ x: 25 }}
+            scale={{ x: "time" }}
+            width={400}
+          >
+            <VictoryAxis
+              style={{
+                axis: { stroke: "#413075" },
+                axisLabel: { fontSize: 20, padding: 30 },
+                ticks: { stroke: "black", size: 5 },
+                tickLabels: { fontSize: 10, padding: 5 },
+              }}
+            />
+            <VictoryAxis
+              dependentAxis
+              style={{
+                axis: { stroke: "#413075" },
+                axisLabel: { fontSize: 20, padding: 30 },
+                ticks: { stroke: "black", size: 5 },
+                tickLabels: { fontSize: 10, padding: 5 },
+              }}
+            />
+            <VictoryCandlestick
+              candleColors={{ positive: "#ffff", negative: "#E43A19" }}
+              style={{
+                data: {
+                  fillOpacity: 1,
+                  stroke: "#413075",
+                  strokeWidth: 1,
+                },
+              }}
+              data={data}
+            />
+          </VictoryChart>
+        </View>
+        <View style={styles.button}>
+          <Button
+            buttonStyle={{
+              borderColor: "black",
+            }}
+            title="D"
+            type="outline"
+          />
+          <Button
+            buttonStyle={{
+              borderColor: "black",
+            }}
+            title="W"
+            type="outline"
+          />
+          <Button
+            buttonStyle={{
+              borderColor: "black",
+            }}
+            title="M"
+            type="outline"
+          />
+        </View>
+      </ScrollView>
+    );
+  } else {
+    return (
+      <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#413075" />
       </View>
-      <View style={styles.button}>
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="D"
-          type="outline"
-        />
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="W"
-          type="outline"
-        />
-        <Button
-          buttonStyle={{
-            borderColor: "black",
-          }}
-          title="M"
-          type="outline"
-        />
-      </View>
-    </ScrollView>
-  );
+    );
+  }
 };
 
 // ViewStockScreen.navigationOptions = ({ navigation }) => {
@@ -349,6 +364,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     backgroundColor: "white",
     paddingBottom: 15,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });
 
