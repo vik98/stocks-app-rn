@@ -8,7 +8,9 @@ const ExploreScreen = (props) => {
       <Text>Explore Screen</Text>
       <Button
         title="View Stock"
-        onPress={() => props.navigation.navigate("ViewStock")}
+        onPress={() =>
+          props.navigation.navigate("ViewStock", { symbol: "IBM" })
+        }
       />
     </View>
   );

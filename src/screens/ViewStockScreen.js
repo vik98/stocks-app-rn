@@ -33,12 +33,14 @@ const ViewStockScreen = ({ navigation }) => {
   const [symbol, setSymbol] = useState({});
 
   const getData = async () => {
+    const param = navigation.getParam("symbol");
     const response = await api.get(
-      `/query?function=TIME_SERIES_DAILY&symbol=IBM&&apikey=${API_KEY}`
+      `/query?function=TIME_SERIES_DAILY&symbol=${param}&&apikey=${API_KEY}`
     );
     const quote = await api.get(
-      `/query?function=GLOBAL_QUOTE&symbol=IBM&&apikey=${API_KEY}`
+      `/query?function=GLOBAL_QUOTE&symbol=${param}&&apikey=${API_KEY}`
     );
+    console.log(quote.data);
     const symbol = {
       symbol: quote.data["Global Quote"]["01. symbol"],
       low: quote.data["Global Quote"]["04. low"],
