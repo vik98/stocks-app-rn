@@ -37,7 +37,7 @@ const ResolveAuthScreen = (props) => {
 
   return (
     <View style={[styles.container, styles.horizontal]}>
-      <ActivityIndicator size="large" color="#413075" />
+      <ActivityIndicator size="large" color="black" />
     </View>
   );
 };
