@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Animated, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import {
+  Animated,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  View,
+  ScrollView,
+  LogBox,
+} from "react-native";
 import {
   ListItem,
   Text,
@@ -11,6 +19,9 @@ import {
 import TouchableScale from "react-native-touchable-scale";
 import NewsCardComponent from "../components/NewsCardComponent";
 import useNews from "../hooks/useNews";
+import { Ionicons } from "@expo/vector-icons";
+import * as Font from "expo-font";
+LogBox.ignoreAllLogs();
 
 const NewsScreen = () => {
   const [scrollYValue, setScrollYValue] = useState(new Animated.Value(0));
@@ -96,6 +107,167 @@ const NewsScreen = () => {
       </ListItem>
     );
   };
+  const [loaded] = Font.useFonts({
+    roboto: require("../../assets/Roboto-Regular.ttf"),
+    robotothin: require("../../assets/Roboto-Thin.ttf"),
+    robotolight: require("../../assets/Roboto-Light.ttf"),
+  });
+  if (!loaded) {
+    return null;
+  } else {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              height: 80,
+              backgroundColor: "white",
+              //borderBottomWidth: 1,
+              //borderBottomColor: "#dddddd",
+            }}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                //padding: 10,
+                backgroundColor: "white",
+                marginHorizontal: 20,
+                // shadowOffset: { width: 0, height: 0 },
+                // shadowColor: "black",
+                // shadowOpacity: 0.2,
+                // elevation: 1,
+                marginTop: Platform.OS == "android" ? 30 : null,
+              }}
+            >
+              <Ionicons
+                name="ios-paper"
+                size={24}
+                color="black"
+                style={{ paddingTop: 10, alignSelf: "center" }}
+              />
+            </View>
+          </View>
+          <ScrollView scrollEventThrottle={16}>
+            <Animated.View
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+              }}
+            >
+              <SafeAreaView
+                style={{
+                  backgroundColor: "white",
+                  flex: 1,
+                  alignItems: "center",
+                }}
+              >
+                <Animated.ScrollView
+                  showsVerticalScrollIndicator={false}
+                  style={styles.scrollview}
+                  contentContainerStyle={styles.content}
+                  onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { y: scrollYValue } } }],
+                    { useNativeDriver: true },
+                    () => {} // Optional async listener
+                  )}
+                  contentInsetAdjustmentBehavior="automatic"
+                >
+                  {results != null
+                    ? results.map((item) => (
+                        <NewsCardComponent
+                          data={item}
+                          unique={Math.floor(Math.random() * 999999)}
+                        />
+                      ))
+                    : null}
+                </Animated.ScrollView>
+              </SafeAreaView>
+            </Animated.View>
+          </ScrollView>
+        </View>
+      </SafeAreaView>
+    );
+  }
+  // const [loaded] = Font.useFonts({
+  //   roboto: require("../../assets/Roboto-Regular.ttf"),
+  //   robotothin: require("../../assets/Roboto-Thin.ttf"),
+  //   robotolight: require("../../assets/Roboto-Light.ttf"),
+  // });
+  // if (!loaded) {
+  //   return null;
+  // } else {
+  //   return (
+  //     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+  //       <View style={{ flex: 1 }}>
+  //         <View
+  //           style={{
+  //             height: 80,
+  //             backgroundColor: "white",
+  //             //borderBottomWidth: 1,
+  //             //borderBottomColor: "#dddddd",
+  //           }}
+  //         >
+  //           <View
+  //             style={{
+  //               flexDirection: "row",
+  //               alignItems: "center",
+  //               justifyContent: "center",
+  //               //padding: 10,
+  //               backgroundColor: "white",
+  //               marginHorizontal: 20,
+  //               // shadowOffset: { width: 0, height: 0 },
+  //               // shadowColor: "black",
+  //               // shadowOpacity: 0.2,
+  //               // elevation: 1,
+  //               marginTop: Platform.OS == "android" ? 30 : null,
+  //             }}
+  //           >
+  //             <Ionicons
+  //               name="ios-paper"
+  //               size={35}
+  //               color="black"
+  //               style={{ paddingTop: 10, alignSelf: "center" }}
+  //             />
+  //           </View>
+  //         </View>
+  //         <ScrollView scrollEventThrottle={16}>
+  //           {/* <Animated.View
+  //             style={{
+  //               flex: 1,
+  //               backgroundColor: "white",
+  //             }}
+  //           >
+  //             <SafeAreaView
+  //               style={{
+  //                 backgroundColor: "white",
+  //                 flex: 1,
+  //                 alignItems: "center",
+  //               }}
+  //             >
+  //               <Animated.ScrollView
+  //                 showsVerticalScrollIndicator={false}
+  //                 style={styles.scrollview}
+  //                 contentContainerStyle={styles.content}
+  //                 onScroll={Animated.event(
+  //                   [{ nativeEvent: { contentOffset: { y: scrollYValue } } }],
+  //                   { useNativeDriver: true },
+  //                   () => {} // Optional async listener
+  //                 )}
+  //                 contentInsetAdjustmentBehavior="automatic"
+  //               >
+  //                 {results != null
+  //                   ? results.map((item) => <NewsCardComponent data={item} />)
+  //                   : null}
+  //               </Animated.ScrollView>
+  //             </SafeAreaView>
+  //           </Animated.View> */}
+  //         </ScrollView>
+  //       </View>
+  //     </SafeAreaView>
+  //   );
+  // }
   return (
     <Animated.View
       style={{
@@ -103,7 +275,6 @@ const NewsScreen = () => {
         backgroundColor: "white",
       }}
     >
-      <StatusBar barStyle="dark-content" />
       <SafeAreaView
         style={{ backgroundColor: "white", flex: 1, alignItems: "center" }}
       >

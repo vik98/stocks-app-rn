@@ -1,5 +1,7 @@
 import React, { Component, useEffect, useState } from "react";
+import { LogBox } from "react-native";
 import * as LocalAuthentication from "expo-local-authentication";
+LogBox.ignoreAllLogs();
 
 const FingerPrintScreen = (props) => {
   const [compatible, setCompatible] = useState(true);

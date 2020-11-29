@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  LogBox,
+} from "react-native";
 import * as Google from "expo-google-app-auth";
+LogBox.ignoreAllLogs();
 
 const IOS_CLIENT_ID =
   "899650021977-127mp8q8ktn0m75iip4v28e1q3tgreia.apps.googleusercontent.com";

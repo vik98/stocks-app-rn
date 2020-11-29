@@ -14,9 +14,9 @@ export default () => {
     console.log(results.length);
   };
 
-  useEffect(() => {
-    searchApi("tesco");
-  }, []);
+  // useEffect(() => {
+  //   searchApi("tesco");
+  // }, []);
 
   return [searchApi, results, error];
 };

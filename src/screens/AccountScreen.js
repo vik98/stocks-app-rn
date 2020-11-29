@@ -1,20 +1,42 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Image } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import { FontAwesome } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
 const AccountScreen = (props) => {
   return (
-    <SafeAreaView forceInset={{ top: "always" }}>
-      <View>
-        <Text> Profile Screen </Text>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-          Welcome, {props.navigation.getParam("username")}
-        </Text>
-        <Button
-          title="Sign out"
-          onPress={() => props.navigation.navigate("Login")}
+    <SafeAreaView
+      style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+    >
+      <Image
+        source={require("../../assets/profile.png")}
+        style={{
+          width: 200,
+          height: 130,
+          resizeMode: "contain",
+        }}
+      />
+
+      <Text
+        style={{
+          paddingVertical: 20,
+          fontSize: 40,
+          fontWeight: "normal",
+          fontFamily: "robotothin",
+        }}
+      >
+        Hi
+      </Text>
+      <TouchableOpacity onPress={() => props.navigation.navigate("Login")}>
+        <Image
+          source={require("../../assets/logout.png")}
+          style={{
+            width: 50,
+            height: 50,
+            resizeMode: "contain",
+          }}
         />
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

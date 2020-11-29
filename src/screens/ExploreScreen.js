@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   ScrollView,
   Image,
+  LogBox,
 } from "react-native";
 import * as Font from "expo-font";
 import StockCardComponent from "../components/StockCardComponent";
@@ -16,6 +17,10 @@ import { SimpleLineIcons } from "@expo/vector-icons";
 import IndexCardComponent from "../components/IndexCardComponent";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import IPOCardComponent from "../components/IPOCardComponent";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+LogBox.ignoreAllLogs();
 
 const ExploreScreen = (props) => {
   const [loaded] = Font.useFonts({
@@ -97,10 +102,7 @@ const ExploreScreen = (props) => {
                 right now.
               </Text>
               <Spacer />
-              {/* <Button
-        title="Login "
-        onPress={() => props.navigation.navigate("ResolveAuth")}
-      /> */}
+
               <SimpleLineIcons name="arrow-down" size={24} color="black" />
               <Spacer />
             </View>
@@ -109,10 +111,10 @@ const ExploreScreen = (props) => {
                 style={{
                   fontSize: 24,
                   paddingHorizontal: 20,
-                  fontFamily: "robotolight",
+                  fontFamily: "roboto",
                 }}
               >
-                Market Indices
+                Market Indices{"  "}
               </Text>
               <View style={{ height: 130, marginTop: 20 }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -134,7 +136,7 @@ const ExploreScreen = (props) => {
                 style={{
                   fontSize: 24,
                   paddingHorizontal: 20,
-                  fontFamily: "robotolight",
+                  fontFamily: "roboto",
                   paddingTop: 20,
                 }}
               >
@@ -180,7 +182,7 @@ const ExploreScreen = (props) => {
               <Text
                 style={{
                   fontSize: 24,
-                  fontFamily: "robotolight",
+                  fontFamily: "roboto",
                   paddingTop: 20,
                   paddingHorizontal: 20,
                 }}
@@ -190,11 +192,17 @@ const ExploreScreen = (props) => {
               </Text>
               <View style={{ height: 130, marginTop: 20 }}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                  <StockCardComponent
-                    value={1245.12}
-                    name="Apple Inc."
-                    change={-23.5}
-                  />
+                  <TouchableOpacity
+                    onPress={() =>
+                      props.navigation.navigate("ViewStock", { symbol: "AAPL" })
+                    }
+                  >
+                    <StockCardComponent
+                      value={1245.12}
+                      name="Apple Inc."
+                      change={-23.5}
+                    />
+                  </TouchableOpacity>
                   <StockCardComponent
                     value={75.44}
                     name="Alphabet Inc"
@@ -218,6 +226,28 @@ const ExploreScreen = (props) => {
                   <StockCardComponent value={545} name="IBM" change={-0.5} />
                 </ScrollView>
               </View>
+              <Text
+                style={{
+                  fontSize: 24,
+                  fontFamily: "roboto",
+                  paddingTop: 20,
+                  paddingHorizontal: 20,
+                }}
+              >
+                IPOs{"  "}
+                <SimpleLineIcons
+                  name="organization"
+                  size={20}
+                  color="black"
+                  style={{ paddingTop: 15, paddingLeft: 10 }}
+                />
+              </Text>
+              <View style={{ height: 130, marginTop: 20 }}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                  <IPOCardComponent />
+                </ScrollView>
+              </View>
+              {/* Add recommended stocks */}
             </View>
           </ScrollView>
         </View>

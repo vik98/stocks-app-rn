@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import * as Font from "expo-font";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+
 const StockCardComponent = (props) => {
   const [loaded] = Font.useFonts({
     roboto: require("../../assets/Roboto-Regular.ttf"),
@@ -23,13 +25,26 @@ const StockCardComponent = (props) => {
           height: 130,
           width: 130,
           marginLeft: 20,
-          borderWidth: 0.5,
+          marginRight: 10,
+          borderWidth: 0.7,
           borderColor: "#dddddd",
+          borderRadius: 2,
+          //elevation: 4,
+          //backgroundColor: "grey",
+          //paddingBottom: 0.2,
+          //paddingRight: 0.2,
+          elevation: 3,
         }}
       >
-        <View style={{ flex: 1.5 }}>
-          <SimpleLineIcons
+        <View style={{ flex: 1.5, backgroundColor: "white" }}>
+          {/* <SimpleLineIcons
             name="organization"
+            size={24}
+            color="black"
+            style={{ paddingTop: 15, paddingLeft: 10 }}
+          /> */}
+          <FontAwesome
+            name="building-o"
             size={24}
             color="black"
             style={{ paddingTop: 15, paddingLeft: 10 }}
@@ -46,7 +61,7 @@ const StockCardComponent = (props) => {
             {props.name}
           </Text>
         </View>
-        <View style={{ flex: 1, paddingLeft: 10 }}>
+        <View style={{ flex: 1, paddingLeft: 10, backgroundColor: "white" }}>
           <Text
             style={{
               fontSize: 13,

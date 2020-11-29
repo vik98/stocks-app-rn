@@ -7,7 +7,6 @@ import AccountScreen from "./src/screens/AccountScreen";
 import ExploreScreen from "./src/screens/ExploreScreen";
 import SearchStockScreen from "./src/screens/SearchStockScreen";
 import ViewStockScreen from "./src/screens/ViewStockScreen";
-import VoiceSearchStockScreen from "./src/screens/VoiceSearchStockScreen";
 import FingerPrintScreen from "./src/screens/FingerPrintScreen";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
 import NewsScreen from "./src/screens/NewsScreen";
@@ -98,13 +97,13 @@ voiceSearchFlow.navigationOptions = {
 };
 
 const switchNavigator = createSwitchNavigator({
-  // fingerPrintFlow: createStackNavigator({
-  //   FingerPrint: FingerPrintScreen,
-  // }),
-  // loginFlow: createStackNavigator({
-  //   Login: LoginScreen,
-  //   ResolveAuth: ResolveAuthScreen,
-  // }),
+  fingerPrintFlow: createStackNavigator({
+    FingerPrint: FingerPrintScreen,
+  }),
+  loginFlow: createStackNavigator({
+    Login: LoginScreen,
+    ResolveAuth: ResolveAuthScreen,
+  }),
   mainFlow: createBottomTabNavigator(
     {
       exploreFlow,

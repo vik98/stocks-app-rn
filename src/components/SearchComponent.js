@@ -55,10 +55,11 @@ const styles = StyleSheet.create({
     padding: 12,
     paddingLeft: 20,
     paddingRight: 20,
-    borderRadius: 20,
+    borderRadius: 10,
     borderColor: "#888888",
     fontSize: 18,
     height: 50,
+    fontFamily: "roboto",
   },
 });
 

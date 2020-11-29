@@ -6,11 +6,12 @@ import {
   Button,
   Image,
   TouchableOpacity,
+  LogBox,
 } from "react-native";
 import TypeWriter from "react-native-typewriter";
 import * as Font from "expo-font";
 import Spacer from "../components/Spacer";
-
+LogBox.ignoreAllLogs();
 const IOS_CLIENT_ID =
   "899650021977-127mp8q8ktn0m75iip4v28e1q3tgreia.apps.googleusercontent.com";
 const ANDROID_CLIENT_ID =
@@ -67,11 +68,8 @@ const LoginScreen = (props) => {
           Lemon Squeezy
         </Text>
         <Spacer />
-        {/* <Button
-        title="Login "
-        onPress={() => props.navigation.navigate("ResolveAuth")}
-      /> */}
         <TypeWriter
+          children={null}
           typing={index}
           onTypingEnd={() => {
             if (index == 1) {

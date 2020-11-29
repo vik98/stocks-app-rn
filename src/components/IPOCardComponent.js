@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import * as Font from "expo-font";
-const IndexCardComponent = (props) => {
+import { SimpleLineIcons } from "@expo/vector-icons";
+const IPOCardComponent = (props) => {
   const [loaded] = Font.useFonts({
     roboto: require("../../assets/Roboto-Regular.ttf"),
     robotothin: require("../../assets/Roboto-Thin.ttf"),
@@ -13,47 +14,31 @@ const IndexCardComponent = (props) => {
     return (
       <View
         style={{
-          height: 130,
-          width: 170,
+          height: 70,
+          width: 380,
           marginLeft: 20,
           marginRight: 10,
           borderWidth: 0.5,
           borderColor: "#dddddd",
-          borderRadius: 5,
-
           //elevation: 4,
-          //backgroundColor: "grey",
+          backgroundColor: "white",
+          borderRadius: 5,
           //paddingBottom: 0.2,
           //paddingRight: 0.2,
-          elevation: 3,
+          elevation: 1,
+          flexDirection: "row",
         }}
       >
-        <View style={{ flex: 1.5, backgroundColor: "white" }}>
-          <Text
-            style={{
-              paddingTop: 10,
-              paddingLeft: 10,
-              fontSize: 18,
-              alignSelf: "flex-start",
-              fontFamily: "roboto",
-            }}
-          >
-            {props.name}
-          </Text>
-          <Text
-            style={{
-              paddingTop: 6,
-              paddingLeft: 12,
-              fontSize: 10,
-              alignSelf: "flex-start",
-              fontFamily: "roboto",
-              color: "grey",
-            }}
-          >
-            {props.index}
-          </Text>
-        </View>
-        <View style={{ flex: 1, paddingLeft: 10, backgroundColor: "white" }}>
+        <View
+          style={{
+            flex: 2,
+            paddingLeft: 10,
+
+            backgroundColor: "white",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Text
             style={{
               fontSize: 14,
@@ -61,20 +46,28 @@ const IndexCardComponent = (props) => {
               fontFamily: "roboto",
             }}
           >
-            $ {props.value}
+            All IPOs
           </Text>
           <Text
             style={{
               paddingTop: 5,
-              paddingLeft: 3,
+              paddingLeft: 0,
               fontSize: 12,
               alignSelf: "flex-start",
               fontFamily: "roboto",
-              color: "red",
+              color: "grey",
             }}
           >
-            - {props.change}
+            Upcoming and Closed IPOs
           </Text>
+        </View>
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <SimpleLineIcons
+            name="arrow-right"
+            size={20}
+            color="black"
+            style={{ paddingVertical: 25, paddingHorizontal: 10 }}
+          />
         </View>
       </View>
     );
@@ -83,4 +76,4 @@ const IndexCardComponent = (props) => {
 
 const styles = StyleSheet.create({});
 
-export default IndexCardComponent;
+export default IPOCardComponent;
